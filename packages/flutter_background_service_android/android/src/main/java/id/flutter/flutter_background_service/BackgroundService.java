@@ -214,7 +214,6 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
             flutterLoader.ensureInitializationComplete(getApplicationContext(), null);
 
-            isRunning.set(true);
             backgroundEngine = new FlutterEngine(this);
 
             // remove FlutterBackgroundServicePlugin (because its only for UI)
@@ -233,6 +232,7 @@ public class BackgroundService extends Service implements MethodChannel.MethodCa
 
 
             backgroundEngine.getDartExecutor().executeDartEntrypoint(dartEntrypoint, args);
+            isRunning.set(true);
 
         } catch (UnsatisfiedLinkError e) {
             notificationContent = "Error " + e.getMessage();
